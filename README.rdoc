@@ -1,0 +1,25 @@
+= Browser / HTTP Map-Reduce driver
+
+Working example of browser based, HTTP driven map-reduce for a distributed
+word count. The jobs are assigned by the job-server and computation is done
+by the clients browser, after which the results are posted back (emit) to the
+server and the cycle repeats until the computation is done.
+
+== Huh, why?
+
+It's a proof of concept with the goal of lowering the barrier to entry for any online
+user to contribute some of their spare CPU cycles to a distributed computation.
+After all, what could be easier than clicking a link?
+
+== Launching example
+
+  (1) > ruby jobserver.rb -p 80 -e production
+  (2) > open your browser and point it to the jobserver
+
+  That's it.
+
+For full details, take a look at:
+http://www.igvita.com/2009/03/03/collaborative-map-reduce-in-the-browser/
+
+== Contact
+Ilya Grigorik <ilya@igvita.com> (Twitter: @igrigorik)
