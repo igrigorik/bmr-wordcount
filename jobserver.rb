@@ -6,7 +6,7 @@
 #  2) Client executes javascript map/reduce jobs via JavaScript
 #  3) Client emits (POST) intermediate results back to job server
 #  4) Client is redirected to next available job (map or reduce)
-#  
+#
 
 require "rubygems"
 require "sinatra"
@@ -23,9 +23,9 @@ get "/" do
   redirect "/done"
 end
 
-get "/map/*"  do erb :map,    :file => params[:splat].first; end
-get "/reduce" do erb :reduce, :data => options.reduce_jobs;  end
-get "/done"   do erb :done,   :answer => options.result;     end
+get "/map/*"  do erb :map,    :locals => {:file => params[:splat].first}; end
+get "/reduce" do erb :reduce, :locals => {:data => options.reduce_jobs};  end
+get "/done"   do erb :done,   :locals => {:answer => options.result};     end
 
 post "/emit/:phase" do
   case params[:phase]

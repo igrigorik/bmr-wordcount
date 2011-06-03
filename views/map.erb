@@ -1,2 +1,2 @@
 <% @execute = "map" %>
-<%= File.open(options[:file], "r").readlines.join %>
+<%= IO.read(file).strip %>

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
 
       function map() {
         var words = document.body.innerHTML.split(/\n|\s/).length;
@@ -10,7 +10,7 @@
       function reduce() {
         var sum = 0;
         var docs = document.body.innerHTML.split(/\n/);
-        for each (num in docs) { sum+= parseInt(num) > 0 ? parseInt(num) : 0 }
+        for (num in docs) { sum += ((parseInt(num) > 0) ? parseInt(num) : 0) }
         emit('finalize', {'sum': sum});
       }
 
@@ -20,21 +20,22 @@
         myForm.action = "/emit/"+phase;
 
         for (var k in data) {
-          var myInput = document.createElement("input") ;
-          myInput.setAttribute("name", k) ;
+          var myInput = document.createElement("input");
+          myInput.setAttribute("name", k);
           myInput.setAttribute("value", data[k]);
-          myForm.appendChild(myInput) ;
+          myForm.appendChild(myInput);
         }
 
-        document.body.appendChild(myForm) ;
-        myForm.submit() ;
-        document.body.removeChild(myForm) ;
+        document.body.appendChild(myForm);
+        myForm.submit();
+        document.body.removeChild(myForm);
       }
 
+      window.onload = function(){ <%= "#{@execute}();" if @execute %> };
     </script>
   </head>
 
-  <body onload="<%= "#{@execute}();" if @execute %>">
+  <body>
     <%= yield %>
   </body>
 </html>
